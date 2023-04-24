@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+            <label for="">Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter your name" value="{{get.name}}">
+        </div>
+
+
+        <div class="col-6">
+            <label for="">Age</label>
+            <input type="text" name="age" class="form-control" placeholder="Enter your age"  value="{{get.age}}">
+        </div>
+
+
+        <div class="col-6">
+            <label for="">Email</label>
+            <input type="text" name="email" class="form-control" placeholder="Enter your email"  value="{{get.email}}">
+        </div>
+        
+        <div class="col-6">
+            <label for="">Profile Pic</label>
+            <input type="file" name="file" class="form-control" value="{{get.profile_pic}}">
+        </div>
+
+    </div>
+    <button class="btn btn-info" type="submit">Update</button>
+</form>
+
+{% endblock  %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if msg == null %}
+<p></p>
+{% else %}
+<div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+    <strong>Insertion</strong> {{msg}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+            <label for="">Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter your name">
+        </div>
+
+        <div class="col-6">
+            <label for="">Age</label>
+            <input type="text" name="age" class="form-control" placeholder="Enter your age">
+        </div>
+
+        <div class="col-6">
+            <label for="">Email</label>
+            <input type="text" name="email" class="form-control" placeholder="Enter your email">
+        </div>
+
+        <div class="col-6">
+            <label for="">Profile Pic</label>
+            <input type="file" name="file" class="form-control">
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Submit</button>
+</form>
+
+<h3 class="text text-danger ">Details</h3>
+<table class="table table-stripped" style="text-align: center;">
+    <thead>
+        <th>Sl.no</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Profile</th>
+        <th colspan="2">Action</th>
+    </thead>
+    <tbody>
+        {% for data in data %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{data.name}}</td>
+            <td>{{data.age}}</td>
+            <td>{{data.email}}</td>
+            <td><img src="media/{{data.profile_pic}}" alt="{{data.name}}.img" height="100px" width="100px"></td>
+            <td>
+                <a href="/edit/{{data.id}}"><button class="btn btn-info mx-2">Edit</button></a>
+                <a href="/delete/{{data.id}}"><button class="btn btn-danger">Delete</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
